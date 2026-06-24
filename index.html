@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seuad Kassa | Product Manager</title>
+  <meta
+    name="description"
+    content="Portfolio de Seuad Kassa, Product Manager spécialisée en santé numérique, roadmap produit, validation fonctionnelle et interopérabilité HL7 FHIR."
+  />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --primary: #1d4ed8;
+      --primary-soft: #dbeafe;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(248, 250, 252, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      padding: 84px 0 48px;
+      background:
+        radial-gradient(circle at top left, rgba(219, 234, 254, 0.9), transparent 35%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 4vw, 4.2rem);
+      line-height: 1.08;
+      margin: 0 0 18px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      margin: 0 0 26px;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero-card,
+    .card,
+    .skills-card,
+    .timeline-item,
+    .mini-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3,
+    .card h3,
+    .skills-card h3,
+    .timeline-top h3,
+    .mini-card h4 {
+      margin-top: 0;
+    }
+
+    .hero-card ul,
+    .skills-card ul,
+    .timeline-item ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 14px;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      color: var(--muted);
+      margin: 0 0 34px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 22px;
+    }
+
+    .timeline-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .timeline-top span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .badge-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+    }
+
+    .badge-highlight {
+      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .badge-highlight h3 {
+      margin-top: 0;
+    }
+
+    .badge-highlight a {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 18px;
+      background: #ffffff;
+      color: var(--primary);
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .mini-cards {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-box {
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 28px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact-box p {
+      color: rgba(255, 255, 255, 0.84);
+      margin: 0;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-link {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .contact-link strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .contact-link a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .badge-box,
+      .contact-box,
+      .skills-grid,
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .timeline-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand">Seuad Kassa</a>
+      <nav class="nav-links">
+        <a href="#about">A propos</a>
+        <a href="#skills">Competences</a>
+        <a href="#experience">Experiences</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#education">Formation</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Product Manager | Digital Health</span>
+          <h1>Concevoir des produits sante utiles, fiables et centres utilisateur.</h1>
+          <p>
+            Product Manager specialisee dans la conception, la planification
+            et l'evolution de solutions numeriques en sante. Expertise en
+            recueil des besoins, roadmap produit, validation fonctionnelle
+            et interoperabilite HL7 FHIR.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#experience">Voir mon parcours</a>
+            <a class="btn btn-secondary" href="./cv-seuad-kassa.pdf" target="_blank" rel="noopener">
+              Telecharger mon CV
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Produit</strong>
+              <span>Roadmap, cadrage fonctionnel, priorisation</span>
+            </div>
+            <div class="stat">
+              <strong>Sante numerique</strong>
+              <span>Parcours sante, besoins metiers, experience utilisateur</span>
+            </div>
+            <div class="stat">
+              <strong>HL7 FHIR</strong>
+              <span>Interopérabilite, API REST, standards de sante</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Profil</h3>
+          <ul>
+            <li>Experience en gestion de produit dans le secteur de la sante.</li>
+            <li>Coordination entre equipes techniques, QA et metiers.</li>
+            <li>Animation de sprints Agile et validation des evolutions.</li>
+            <li>Certification HL7 FHIR R4 Proficiency Exam.</li>
+            <li>Approche orientee client, qualite et impact.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">A propos</h2>
+        <p class="section-intro">
+          Product Manager avec une experience confirmee dans la conception de
+          solutions digitales pour la sante. J'interviens sur le recueil des
+          besoins, la redaction des specifications fonctionnelles, la
+          construction de roadmaps, la coordination Agile et la validation
+          utilisateur. Mon expertise en interoperabilite, notamment autour de
+          HL7 FHIR, me permet de faire le lien entre enjeux metiers,
+          contraintes techniques et experience utilisateur.
+        </p>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>Ma valeur ajoutee</h3>
+            <p>
+              Transformer les besoins metiers et utilisateurs en fonctionnalites
+              claires, priorisees et exploitables par les equipes techniques.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Mon approche</h3>
+            <p>
+              Une vision produit pragmatique, collaborative et orientee qualite,
+              avec une attention forte portee a l'usage, a la conformite et a
+              l'impact reel.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Competences</h2>
+        <p class="section-intro">
+          Un profil hybride, au croisement du produit, de la sante numerique et
+          de l'interoperabilite.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skills-card">
+            <h3>Produit</h3>
+            <ul>
+              <li>Analyse et recueil des besoins</li>
+              <li>Cadrage fonctionnel</li>
+              <li>Definition des fonctionnalites cles</li>
+              <li>Criteres de succes</li>
+              <li>Roadmap produit</li>
+            </ul>
+          </div>
+
+          <div class="skills-card">
+            <h3>Delivery & Agile</h3>
+            <ul>
+              <li>Animation de sprints Scrum</li>
+              <li>Coordination equipes techniques et QA</li>
+              <li>Recette fonctionnelle</li>
+              <li>Suivi des anomalies et correctifs</li>
+              <li>Mise en production</li>
+            </ul>
+          </div>
+
+          <div class="skills-card">
+            <h3>Sante & Interoperabilite</h3>
+            <ul>
+              <li>HL7 FHIR</li>
+              <li>Guides d'implementation</li>
+              <li>API REST</li>
+              <li>SNOMED</li>
+              <li>LOINC</li>
+            </ul>
+          </div>
+
+          <div class="skills-card">
+            <h3>Outils</h3>
+            <ul>
+              <li>Jira / Confluence</li>
+              <li>Slack / Teams</li>
+              <li>Zephyr</li>
+              <li>Figma / Miro / Canva</li>
+              <li>GitLab / GitHub / Visual Studio</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Experiences professionnelles</h2>
+        <p class="section-intro">
+          Un parcours centre sur la conception, l'evolution et la validation de
+          produits numeriques dans l'univers de la sante.
+        </p>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-top">
+              <h3>Product Manager - Epoca</h3>
+              <span>Janv. 2025 - Aujourd'hui</span>
+            </div>
+            <ul>
+              <li>Elaboration des specifications fonctionnelles a partir des besoins sante et business.</li>
+              <li>Definition des fonctionnalites cles et des criteres de succes.</li>
+              <li>Participation a la construction de la roadmap produit.</li>
+              <li>Animation de sprints agiles et coordination avec l'equipe QA.</li>
+              <li>Suivi des tests utilisateurs pour ameliorer l'experience et la satisfaction client.</li>
+            </ul>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-top">
+              <h3>Product Owner / Product Manager - Fyrstain</h3>
+              <span>Sept. 2022 - Aout 2024</span>
+            </div>
+            <ul>
+              <li>Mise en place de processus de suivi pour l'evaluation.</li>
+              <li>Redaction de specifications fonctionnelles et guides d'implementation HL7 FHIR.</li>
+              <li>Animation d'ateliers clients et utilisateurs pour modeliser les parcours sante.</li>
+              <li>Participation a la construction et a la mise a jour de la roadmap produit.</li>
+              <li>Veille reglementaire et technologique sur l'interoperabilite et les standards internationaux.</li>
+              <li>Obtention de la certification HL7 FHIR R4 Proficiency Exam.</li>
+            </ul>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-top">
+              <h3>Assistante ingenieur - Laboratoire IBM, Universite de Pavie</h3>
+              <span>Stage - 3 mois</span>
+            </div>
+            <ul>
+              <li>Collaboration avec l'equipe du projet CAPABLE.</li>
+              <li>Validation technique d'une solution europeenne d'e-sante de type Virtual Coach.</li>
+              <li>Participation aux protocoles de tests fonctionnels bases sur le standard HL7 FHIR.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="container">
+        <h2 class="section-title">Certifications</h2>
+        <p class="section-intro">
+          Une expertise confirmee en interoperabilite sante, validee par une
+          certification reconnue.
+        </p>
+
+        <div class="badge-box">
+          <div class="badge-highlight">
+            <h3>HL7 FHIR R4 Proficiency Exam</h3>
+            <p>
+              Validation officielle de mes competences sur le standard
+              d'interoperabilite HL7 FHIR, couvrant la modelisation des
+              ressources, les API RESTful, les profils et les guides
+              d'implementation.
+            </p>
+            <a href="[badgelist.com](https://badgelist.com/HL7/HL7-FHIR-Proficient/u/SeuadK)" target="_blank" rel="noopener noreferrer">
+              Voir la certification
+            </a>
+          </div>
+
+          <div class="mini-cards">
+            <div class="mini-card">
+              <h4>Interopérabilite sante</h4>
+              <p>Maitrise des standards et logiques d'echange de donnees en sante.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Conception fonctionnelle</h4>
+              <p>Traduction des besoins metiers en specifications claires et exploitables.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Vision produit</h4>
+              <p>Approche centree usage, qualite, faisabilite et coordination transverse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <h2 class="section-title">Formation</h2>
+        <p class="section-intro">
+          Un parcours academique ancre dans la sante et les technologies de l'information.
+        </p>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>Cycle ingenieur - Technologie de l'information pour la sante</h3>
+            <p>Polytech Grenoble - Mention Bien</p>
+          </div>
+          <div class="card">
+            <h3>Licence Sciences interdisciplinaires appliquees a la sante</h3>
+            <p>Faculte de medecine Paris Diderot - Mention Assez Bien</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <h2 class="section-title" style="color: white; margin-bottom: 12px;">Contact</h2>
+            <p>
+              Disponible pour des opportunites en product management, product ownership
+              et projets lies a la sante numerique.
+            </p>
+          </div>
+
+          <div class="contact-links">
+            <div class="contact-link">
+              <strong>Email</strong>
+              <a href="mailto:seuadkassa@yahoo.com">seuadkassa@yahoo.com</a>
+            </div>
+
+            <div class="contact-link">
+              <strong>LinkedIn</strong>
+              <a href="[linkedin.com](https://www.linkedin.com/in/seuad-k-ab45a3213/)" target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/seuad-k-ab45a3213
+              </a>
+            </div>
+
+            <div class="contact-link">
+              <strong>Langues</strong>
+              <span>Francais langue maternelle - Anglais niveau B2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 - Seuad Kassa - Product Manager
+    </div>
+  </footer>
+</body>
+</html>
